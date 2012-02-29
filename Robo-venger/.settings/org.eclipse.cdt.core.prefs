@@ -1,0 +1,7 @@
+#Mon Feb 20 19:12:19 MST 2012
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.591936925/PATH/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.591936925/PATH/operation=replace
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.591936925/PATH/value=C\:\\MinGW\\bin;C\:\\MinGW\\msys\\1.0\\bin;C\:/Program Files (x86)/Java/jre6/bin/client;C\:/Program Files (x86)/Java/jre6/bin;C\:/Program Files (x86)/Java/jre6/lib/i386;C\:\\Windows;C\:\\Windows\\system32;C\:\\MinGW\\msys\\1.0\\bin;C\:\\SDL\\DLL.;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.591936925/append=true
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.591936925/appendContributed=true
