@@ -33,7 +33,6 @@ class gamengine
 
 	bool quit;       //if true exit game loop
 	bool scrolling;  //To tell if the background should be moving
-	bool life_bar_on; //Small lifebars over the characters
 	float dtime;     //delta time
 	float total_time;//Time the game has been running
 	int current_level; //current level

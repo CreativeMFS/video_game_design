@@ -1,5 +1,7 @@
 #include "objects.h"
 
+bool game_objects::hud_status = false;
+
 SDL_Surface* game_objects::get_surface(){return object;}
 
 SDL_Rect game_objects::get_frame()
@@ -64,7 +66,7 @@ bullet::bullet(SDL_Surface* _object, char type, int x, int y, int y2, float vx)
 	this->type = 'b';
 }
 
-void bullet::update(float dtime, bool _life_bar_on)
+void bullet::update(float dtime)
 {position.x_pos += x_vel*dtime;}
 
 void bullet::show(SDL_Surface* screen)
@@ -118,7 +120,6 @@ player_one::player_one(SDL_Surface* _object, char type, int framerate, int x, in
 	this->jumping = false;
 	this->moving = false;
 	this->fireing = false;
-	this->life_bar_on = false;
 	this ->type = 'p';
 
 	this->life_bar_ratio = (float)this->frame_width / (float)this->health;
@@ -212,11 +213,11 @@ void player_one::show(SDL_Surface* screen)
 	SDL_Rect _frame = get_frame();
 	SDL_BlitSurface(object, &_frame, screen, &current_loc);
 
-	if(life_bar_on)
+	if(hud_status)
 		SDL_FillRect(screen, &gen_life_bar, SDL_MapRGB( screen->format, 0, 215, 0));
 }
 
-void player_one::update(float dtime, bool _life_bar_on)
+void player_one::update(float dtime)
 {
 	static float rad_red = 0;
 	ftr -= dtime;
@@ -250,8 +251,6 @@ void player_one::update(float dtime, bool _life_bar_on)
 			jumping = false;
 		}
 	}
-
-	life_bar_on = _life_bar_on;
 
 	gen_life_bar.x = position.x_pos;
 	gen_life_bar.y = position.y_pos - 10;
@@ -308,7 +307,6 @@ npc::npc(SDL_Surface* _object, char type, int framerate, int x, int y, int fx, i
 	this->jumping = false;
 	this->moving = false;
 	this->fireing = false;
-	this->life_bar_on = false;
 	this->type = 'n';
 
 	this->life_bar_ratio = (float)this->frame_width / (float)this->health;
@@ -323,11 +321,11 @@ void npc::show(SDL_Surface* screen)
 	SDL_Rect _frame = get_frame();
 	SDL_BlitSurface(object, &_frame, screen, &current_loc);
 
-	if(life_bar_on)
+	if(hud_status)
 		SDL_FillRect(screen, &gen_life_bar, SDL_MapRGB( screen->format, 215, 0, 0));
 }
 
-void npc::update(float dtime, bool _life_bar_on)
+void npc::update(float dtime)
 {
 	if(direction == 'l')
 		frame_y = 2;
@@ -350,8 +348,6 @@ void npc::update(float dtime, bool _life_bar_on)
 
 	position.y_pos += y_vel * dtime;
 	shadow.rad = frame_width * SHADOW_RATIO;
-
-	life_bar_on = _life_bar_on;
 
 	gen_life_bar.x = position.x_pos;
 	gen_life_bar.y = position.y_pos - 10;

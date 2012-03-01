@@ -64,7 +64,6 @@ class game_objects
 
 		//Life bar stuff
 		SDL_Rect gen_life_bar;
-		bool life_bar_on;
 
 	public:
 		//Character position
@@ -75,12 +74,13 @@ class game_objects
 		bool fireing;
 		float time_waited;  //wait time for next bullet fire
 		float time_to_wait; //time that must be waited
+		static bool hud_status;
 
 		SDL_Surface* get_surface();
 		SDL_Rect get_frame();
 		SDL_Rect get_bounds();
 		virtual void handle_input(Uint8* keystate);
-		virtual void update(float dtime, bool _life_bar_on)=0;
+		virtual void update(float dtime)=0;
 		virtual void show(SDL_Surface* screen)=0;
 		void set_xy(int x, int y);
 		virtual float get_y()=0;
@@ -99,7 +99,7 @@ class bullet: public game_objects
 
 	public:
 		bullet(SDL_Surface* _object, char type, int x, int y, int y2, float vx);  //y2 is p1 frame height
-		void update(float dtime, bool _life_bar_on);
+		void update(float dtime);
 		void show(SDL_Surface* screen);
 		float get_y();
 		~bullet();
@@ -114,7 +114,7 @@ class player_one: public game_objects
 	public:
 		player_one(SDL_Surface* _object, char type, int framerate, int x, int y, int fx, int fy);
 		void handle_input(Uint8* keystate);
-		void update(float dtime, bool _life_bar_on);
+		void update(float dtime);
 		void show(SDL_Surface* screen);
 		float get_y();
 		~player_one();
@@ -128,7 +128,7 @@ class npc: public game_objects
 
 	public:
 		npc(SDL_Surface* _object, char type, int framerate, int x, int y, int fx, int fy, float vx, int health);
-		void update(float dtime, bool _life_bar_on);
+		void update(float dtime);
 		void show(SDL_Surface* screen);
 		float get_y();
 		~npc();

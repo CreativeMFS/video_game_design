@@ -42,7 +42,6 @@ void gamengine::init()
 	total_time=0;
 	score = 0;
 	scrolling = false;
-	life_bar_on = false;
 	srand(time(0));
 
 	lvl.init(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -131,7 +130,7 @@ void gamengine::input()
 			quit = true;
 		if(event.type == SDL_KEYDOWN)
 			if(event.key.keysym.sym == SDLK_l)
-				life_bar_on = !life_bar_on;
+				game_objects::hud_status = !game_objects::hud_status;
 	}
 
 	keystate = SDL_GetKeyState(NULL);
@@ -145,7 +144,7 @@ void gamengine::update()
 
 	for(it = objs.begin(); it != objs.end(); ++it)
 	{
-		(*it)->update(dtime, life_bar_on);
+		(*it)->update(dtime);
 
 		//The longer SDLK_s is held the faster p1 shoots
 		(*it)->time_waited += dtime;
